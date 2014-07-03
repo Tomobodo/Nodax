@@ -16,9 +16,9 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="C:\workspace\haxelib-dev\openfl" />
+    <class path="E:\Outils\Dev\Haxe\haxe\lib\openfl\2,0,1" />
     <class path="Source" />
-    <class path="C:\workspace\haxelib-dev\openfl\backends\flash" />
+    <class path="E:\Outils\Dev\Haxe\haxe\lib\openfl\2,0,1\backends\flash" />
     <class path="Export\flash\haxe" />
   </classpaths>
   <!-- Build options -->
@@ -27,7 +27,7 @@
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
-    <option enabledebug="False" />
+    <option enabledebug="True" />
     <option additional="--no-output&#xA;-swf-version 11.2" />
   </build>
   <!-- haxelib libraries -->

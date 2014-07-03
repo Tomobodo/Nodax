@@ -10,6 +10,9 @@ class Input extends Sprite
 	
 	public var type : ValueType;
 	public var output : Output;
+	public var node : Node;
+	
+	var _connections : Array<Connection>;
 
 	public function new(name : String, type : ValueType) 
 	{
@@ -23,14 +26,21 @@ class Input extends Sprite
 		
 		buttonMode = true;
 		useHandCursor = true;
+		
+		_connections = new Array<Connection>();
 	}
 	
-	public function connect(output : Output) : Void {
+	public function connect(output : Output, connection : Connection) : Void {
 		this.output = output;
+		_connections.push(connection);
 	}
 	
-	public function setOutput(output : Output) {
-		this.output = output;
-		trace("output set, value : " + output.value);
+	public function disconect(connection : Connection) {
+		output = null;
+		_connections.remove(connection);
+	}
+	
+	public function updateConnections() {
+		for (connection in _connections) connection.update();
 	}
 }

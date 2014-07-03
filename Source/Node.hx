@@ -21,6 +21,7 @@ class Node extends Sprite
 	var _nbOutput : UInt;
 	
 	public var nextNode : Node;
+	public var graph : Graph;
 	
 	var _pressed : Bool;
 	var _mouseOffX : Int;
@@ -50,6 +51,12 @@ class Node extends Sprite
 		if(_pressed){
 			x = e.stageX - _mouseOffX;
 			y = e.stageY - _mouseOffY;
+			
+			for (output in _outputs) 
+				output.updateConnections();
+			
+			for (input in _inputs) 
+				input.updateConnections();
 		}
 	}
 	
@@ -105,7 +112,7 @@ class Node extends Sprite
 		addChild(txtName);
 		
 		_bg.graphics.clear();
-		_bg.graphics.beginFill(0x999999);
+		_bg.graphics.beginFill(0x999999, 0.7);
 		_bg.graphics.drawRect(0, 0, width-10, height + 10);
 	}
 	
@@ -114,12 +121,16 @@ class Node extends Sprite
 	}
 	
 	public function addInput(name : String, type : ValueType) {
-		_inputs[name] = new Input(name, type);
+		var input = new Input(name, type);
+		input.node = this;
+		_inputs[name] = input;
 		_nbInput++;
 	}
 	
 	public function addOutput(name : String, type : ValueType) {
-		_outputs[name] = new Output(name, type);
+		var output = new Output(name, type);
+		output.node = this;
+		_outputs[name] = output;
 		_nbOutput++;
 	}
 	

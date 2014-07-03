@@ -14,9 +14,12 @@ class Output extends Sprite
 	
 	public var type : ValueType;
 	public var value : Dynamic;
+	public var node : Node;
 	
-	var _line : Sprite;
+	var _line : Connection;
 	var _pressed : Bool;
+	
+	var _connections : Array<Connection>;
 
 	public function new(name : String, type : ValueType) 
 	{
@@ -31,6 +34,8 @@ class Output extends Sprite
 		buttonMode = true;
 		useHandCursor = true;
 		
+		_connections = new Array<Connection>();
+		
 		addEventListener(MouseEvent.MOUSE_DOWN, onPress);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_UP, onRelease);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
@@ -38,12 +43,15 @@ class Output extends Sprite
 		this.mouseChildren = false;
 	}
 	
+	public function updateConnections() {
+		for (connection in _connections)
+			connection.update();
+	}
+	
 	private function onMouseMove(e:MouseEvent):Void 
 	{
 		if(_pressed){
-			_line.graphics.clear();
-			_line.graphics.lineStyle(3, 0xdddddd);
-			_line.graphics.lineTo((e.stageX - (parent.x + x))/1.1, (e.stageY - (parent.y + y))/1.1);
+			_line.grab(cast e.stageX,cast e.stageY);
 		}
 	}
 	
@@ -53,14 +61,17 @@ class Output extends Sprite
 			var target : Dynamic = e.target;
 			if (Std.is(target, Input)) {
 				var input : Input = target;
-				if (input.type == type)
-					input.setOutput(this);
+				if (input.type == type){
+					input.connect(this, _line);
+					_connections.push(_line);
+					_line.setInput(input);
+				}
 				else{
-					removeChild(_line);
+					node.graph.removeConnection(_line);
 					_line = null;
 				}
 			}else {
-				removeChild(_line);
+				node.graph.removeConnection(_line);
 				_line = null;
 			}
 		}
@@ -69,9 +80,7 @@ class Output extends Sprite
 	
 	private function onPress(e:MouseEvent):Void 
 	{
-		_line = new Sprite();
-		_line.mouseEnabled = false;
-		addChild(_line);
+		_line = node.graph.addConnection(this, null);
 		_pressed = true;
 	}
 	
