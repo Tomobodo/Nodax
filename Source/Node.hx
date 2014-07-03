@@ -76,8 +76,6 @@ class Node extends Sprite
 		
 		var maxHeight : Int;
 		
-		/*var name : String = this.toString().split(' ')[1];
-		name = name.substr(0, name.length-1);*/
 		var name : String = Type.getClassName(Type.getClass(this)).split('.')[1];
 		var txtName = new TextField();
 		txtName.mouseEnabled = false;
