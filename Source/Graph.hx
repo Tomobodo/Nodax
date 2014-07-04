@@ -33,6 +33,8 @@ class Graph extends Sprite
 	var _offY : Int;
 	var _offX : Int;
 	
+	public var targetObject : Dynamic;
+	
 	public function new() 
 	{
 		super();

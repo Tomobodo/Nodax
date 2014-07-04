@@ -24,6 +24,7 @@ class Sinus extends Node
 		var inputVal = input.getValue();
 		
 		var resultVal = Math.sin(inputVal);
+		
 		result.set(resultVal);
 	}
 	
