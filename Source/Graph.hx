@@ -43,22 +43,24 @@ class Graph extends Sprite
 		_nodeList = new ListView();
 		_nodeList.width = 150;
 		_nodeList.height = 300;
-		for (cls in CompileTime.getAllClasses('nodes')) {
-			_nodeList.dataSource.add( { text:cls, data:cls} );
-		}
+		
+		for (cls in CompileTime.getAllClasses('nodes')) 
+			_nodeList.dataSource.add( { text:Type.getClassName(cls).split('.')[1], data:cls} );
 		
 		_nodeList.addEventListener(UIEvent.CLICK, onListClicked);
 		
-		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, onRightClick);
+		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, onStageClick);
 	}
 	
 	private function onListClicked(e:UIEvent):Void 
 	{
 		Main.uiRoot.removeChild(_nodeList, false);
-		trace(_nodeList.selectedItems, _nodeList.userData);
+		var nodeClass : Class<Node> = _nodeList.selectedItems[0].data.data;
+		var node : Node = Type.createInstance(nodeClass, []);
+		add(node);
 	}
 	
-	private function onRightClick(e:MouseEvent):Void 
+	private function onStageClick(e:MouseEvent):Void 
 	{
 		Main.uiRoot.addChild(_nodeList);
 		_nodeList.x = e.stageX;

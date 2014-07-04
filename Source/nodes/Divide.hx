@@ -4,7 +4,7 @@ package nodes;
  * ...
  * @author Thomas B
  */
-class Substract extends Node
+class Divide extends Node
 {
 	
 	var I_a : Float;
@@ -15,9 +15,8 @@ class Substract extends Node
 	public function new() 
 	{
 		super();
-		
 	}
-
+	
 	override public function process() {
 		var a : Input = getInput("a");
 		var b : Input = getInput("b");
@@ -27,7 +26,7 @@ class Substract extends Node
 		var aVal = a.getValue();
 		var bVal = b.getValue();
 		
-		var resultVal : Float = aVal - bVal;
+		var resultVal = aVal / bVal;
 		result.set(resultVal);
 	}
 	

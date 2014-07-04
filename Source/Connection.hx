@@ -32,8 +32,8 @@ class Connection extends Sprite
 		
 		graphics.lineStyle(2, 0xffffff);
 		graphics.moveTo(startX, startY);
-		graphics.curveTo(startX + 50, startY, midX, midY);
-		graphics.curveTo(destX - 50, destY, destX, destY);
+		graphics.curveTo(startX + 20, startY, midX, midY);
+		graphics.curveTo(destX - 20, destY, destX, destY);
 	}
 	
 	public function update() {

@@ -35,7 +35,18 @@ class Node extends Sprite
 		_inputs = new Map<String, Dynamic>();
 		_outputs = new Map<String, Dynamic>();
 		
-		create();
+		for (field in Type.getInstanceFields(Type.getClass(this)))
+		{
+			if (field.indexOf('I_') == 0)
+			{
+				var inputName = field.substr(2, field.length - 1);
+				addInput(inputName, Type.typeof(Reflect.field(this, field)));
+			}else if (field.indexOf('O_') == 0)
+			{
+				var outputName = field.substr(2, field.length - 1);
+				addOutput(outputName, Type.typeof(Reflect.field(this, field)));
+			}
+		}
 		
 		_bg = new Sprite();
 		_bg.addEventListener(MouseEvent.MOUSE_DOWN, onPress);
@@ -73,10 +84,6 @@ class Node extends Sprite
 		_mouseOffY = cast e.localY;
 	}
 	
-	function create() {
-		
-	}
-	
 	function draw() {
 		
 		addChild(_bg);
@@ -94,7 +101,7 @@ class Node extends Sprite
 		for (input in _inputs) {
 			addChild(input);
 			input.x = 0;
-			input.y = i * 20 + txtName.height;
+			input.y = i * 20 + txtName.height + 10;
 			++i;
 		}
 		
@@ -105,7 +112,7 @@ class Node extends Sprite
 		for (output in _outputs) {
 			addChild(output);
 			output.x = txtName.x + txtName.width + 20;
-			output.y = i * 20 + txtName.height;
+			output.y = i * 20 + txtName.height + 10;
 			++i;
 		}
 		
@@ -113,11 +120,23 @@ class Node extends Sprite
 		
 		_bg.graphics.clear();
 		_bg.graphics.beginFill(0x999999, 0.7);
-		_bg.graphics.drawRect(0, 0, width-10, height + 10);
+		_bg.graphics.drawRect(0, 0, txtName.x + txtName.width + 20, height + 10);
 	}
 	
 	public function process() {
 		
+	}
+	
+	function getInput(name : String) : Input {
+		var input : Input = _inputs[name];
+		if (input != null) {
+			if (input.output != null)
+			{
+				var previousNode : Node = input.output.node;
+				previousNode.process();
+			}
+		}
+		return input;
 	}
 	
 	public function addInput(name : String, type : ValueType) {

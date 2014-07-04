@@ -4,30 +4,26 @@ package nodes;
  * ...
  * @author Thomas B
  */
-class Substract extends Node
+class Sinus extends Node
 {
-	
-	var I_a : Float;
-	var I_b : Float;
+
+	var I_input : Float;
 	
 	var O_result : Float;
-
+	
 	public function new() 
 	{
 		super();
-		
 	}
-
+	
 	override public function process() {
-		var a : Input = getInput("a");
-		var b : Input = getInput("b");
+		var input : Input = getInput("input");
 		
 		var result : Output = _outputs["result"];
 		
-		var aVal = a.getValue();
-		var bVal = b.getValue();
+		var inputVal = input.getValue();
 		
-		var resultVal : Float = aVal - bVal;
+		var resultVal = Math.sin(inputVal);
 		result.set(resultVal);
 	}
 	

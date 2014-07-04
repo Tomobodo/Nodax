@@ -4,6 +4,9 @@ import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.events.MouseEvent;
 import openfl.Lib;
+import openfl.text.TextField;
+import openfl.text.TextFieldAutoSize;
+import openfl.text.TextFormat;
 import Type;
 /**
  * ...
@@ -41,6 +44,16 @@ class Output extends Sprite
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 		
 		this.mouseChildren = false;
+		
+		var nameTxt : TextField = new TextField();
+		nameTxt.defaultTextFormat = new TextFormat("arial", 10, 0xffffff);
+		nameTxt.autoSize = TextFieldAutoSize.LEFT;
+		nameTxt.text = name;
+		nameTxt.selectable = false;
+		nameTxt.mouseEnabled = false;
+		addChild(nameTxt);
+		nameTxt.x = -5 - nameTxt.width;
+		nameTxt.y = -nameTxt.height / 2;
 	}
 	
 	public function updateConnections() {
@@ -61,7 +74,7 @@ class Output extends Sprite
 			var target : Dynamic = e.target;
 			if (Std.is(target, Input)) {
 				var input : Input = target;
-				if (input.type == type){
+				if (input.type == type || input.type == ValueType.TNull){
 					input.connect(this, _line);
 					_connections.push(_line);
 					_line.setInput(input);
