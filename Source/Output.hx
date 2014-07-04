@@ -64,7 +64,7 @@ class Output extends Sprite
 	private function onMouseMove(e:MouseEvent):Void 
 	{
 		if(_pressed){
-			_line.grab(cast e.stageX,cast e.stageY);
+			_line.grab(cast e.stageX - parent.parent.parent.x,cast e.stageY - parent.parent.parent.y);
 		}
 	}
 	
@@ -93,6 +93,7 @@ class Output extends Sprite
 	
 	private function onPress(e:MouseEvent):Void 
 	{
+		e.stopPropagation();
 		_line = node.graph.addConnection(this, null);
 		_pressed = true;
 	}

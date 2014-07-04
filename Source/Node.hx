@@ -60,8 +60,8 @@ class Node extends Sprite
 	private function onMouseMove(e:MouseEvent):Void 
 	{
 		if(_pressed){
-			x = e.stageX - _mouseOffX;
-			y = e.stageY - _mouseOffY;
+			x = e.stageX - _mouseOffX - parent.parent.x;
+			y = e.stageY - _mouseOffY - parent.parent.y;
 			
 			for (output in _outputs) 
 				output.updateConnections();
@@ -78,6 +78,7 @@ class Node extends Sprite
 	
 	private function onPress(e:MouseEvent):Void 
 	{
+		e.stopPropagation();
 		_pressed = true;
 		
 		_mouseOffX = cast e.localX;
