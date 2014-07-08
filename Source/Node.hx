@@ -27,6 +27,7 @@ class Node extends Sprite
 	var _mouseOffX : Int;
 	var _mouseOffY : Int;
 	var _bg : Sprite;
+	var _baseClass : String;
 	
 	public function new() 
 	{
@@ -91,7 +92,9 @@ class Node extends Sprite
 		
 		var maxHeight : Int;
 		
-		var name : String = Type.getClassName(Type.getClass(this)).split('.')[1];
+		var name : String = Type.getClassName(Type.getClass(this));
+		var namePart = name.split('.');
+		name = namePart[namePart.length - 1];
 		var txtName = new TextField();
 		txtName.mouseEnabled = false;
 		txtName.selectable = false;

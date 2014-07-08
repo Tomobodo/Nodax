@@ -5,6 +5,7 @@ import haxe.ui.toolkit.containers.MenuBar;
 import haxe.ui.toolkit.controls.Menu;
 import haxe.ui.toolkit.core.Root;
 import haxe.ui.toolkit.core.Toolkit;
+import macros.Macros;
 import nodes.Add;
 import nodes.Substract;
 import openfl.display.Sprite;
@@ -35,13 +36,6 @@ class Main extends Sprite {
 		
 		Toolkit.init();
 		Toolkit.openFullscreen(onToolkitInited);
-		
-		if (Reflect.isFunction(test)) {
-		}
-	}
-	
-	function test(a : Int, b : Int ) : Int {
-		return a + b;
 	}
 	
 	function onToolkitInited(root : Root) {

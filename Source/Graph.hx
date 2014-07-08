@@ -54,8 +54,14 @@ class Graph extends Sprite
 		_nodeList.width = 150;
 		_nodeList.height = 300;
 		
-		for (cls in CompileTime.getAllClasses('nodes')) 
-			_nodeList.dataSource.add( { text:Type.getClassName(cls).split('.')[1], data:cls} );
+		for (cls in CompileTime.getAllClasses('nodes')) {
+			var n = Type.getClassName(cls);
+			var npart = n.split('.');
+			n = npart[npart.length - 1];
+			var npart2 = n.split('_');
+			n = npart2[npart2.length - 1];
+			_nodeList.dataSource.add( { text:n, data:cls } );
+		}
 		
 		_nodeList.addEventListener(UIEvent.CLICK, onListClicked);
 		
