@@ -37,7 +37,7 @@ class Input extends Sprite
 		useHandCursor = true;
 		
 		_nameTxt = new TextField();
-		_nameTxt.defaultTextFormat = new TextFormat("arial", 10, 0xffffff);
+		_nameTxt.defaultTextFormat = new TextFormat("arial", 12, 0xffffff);
 		_nameTxt.autoSize = TextFieldAutoSize.LEFT;
 		_nameTxt.text = name;
 		_nameTxt.selectable = false;
@@ -59,7 +59,7 @@ class Input extends Sprite
 	
 	public function connect(output : Output, connection : Connection) : Void {
 		if (this.output != null)
-			disconect(_connection);
+			disconect();
 		this.output = output;
 		_connection = connection;
 		
@@ -68,9 +68,10 @@ class Input extends Sprite
 		_nameTxt.text = name;
 	}
 	
-	public function disconect(connection : Connection) {
+	public function disconect() {
 		output = null;
-		node.graph.removeConnection(_connection);
+		if(_connection != null)
+			node.graph.removeConnection(_connection);
 		_connection = null;
 	}
 	

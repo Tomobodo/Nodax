@@ -6,8 +6,6 @@ import haxe.ui.toolkit.controls.Menu;
 import haxe.ui.toolkit.core.Root;
 import haxe.ui.toolkit.core.Toolkit;
 import macros.Macros;
-import nodes.Add;
-import nodes.Substract;
 import openfl.display.Sprite;
 
 

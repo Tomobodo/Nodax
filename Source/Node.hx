@@ -51,11 +51,22 @@ class Node extends Sprite
 		
 		_bg = new Sprite();
 		_bg.addEventListener(MouseEvent.MOUSE_DOWN, onPress);
-		Lib.current.stage.addEventListener(MouseEvent.MOUSE_UP, onRelease);
 		
+		Lib.current.stage.addEventListener(MouseEvent.MOUSE_UP, onRelease);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+		
+		addEventListener(MouseEvent.RIGHT_CLICK, onRightClick);
 
 		draw();
+	}
+	
+	private function onRightClick(e:Event):Void 
+	{
+		for (input in _inputs)
+			input.disconect();
+		for (output in _outputs)
+			output.disconect();
+		graph.removeNode(this);
 	}
 	
 	private function onMouseMove(e:MouseEvent):Void 
@@ -95,7 +106,10 @@ class Node extends Sprite
 		var name : String = Type.getClassName(Type.getClass(this));
 		var namePart = name.split('.');
 		name = namePart[namePart.length - 1];
+		var namePart2 = name.split('_');
+		name = namePart2[namePart2.length - 1];
 		var txtName = new TextField();
+		txtName.defaultTextFormat = new TextFormat("arial", 16, 0xcc9933, true);
 		txtName.mouseEnabled = false;
 		txtName.selectable = false;
 		txtName.autoSize = TextFieldAutoSize.LEFT;
@@ -123,8 +137,9 @@ class Node extends Sprite
 		addChild(txtName);
 		
 		_bg.graphics.clear();
-		_bg.graphics.beginFill(0x999999, 0.7);
-		_bg.graphics.drawRect(0, 0, txtName.x + txtName.width + 20, height + 10);
+		_bg.graphics.beginFill(0x333333, 0.5);
+		_bg.graphics.lineStyle(4, 0x333333);
+		_bg.graphics.drawRoundRect(0, 0, txtName.x + txtName.width + 20, height + 10, 10,10);
 	}
 	
 	public function process() {

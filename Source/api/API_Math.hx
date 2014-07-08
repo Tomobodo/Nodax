@@ -27,4 +27,15 @@ class API_Math
 		return { result:Std.int(a / b), rest:a % b };
 	}
 	
+	public static function sin(x:Float) : Float {
+		return Math.sin(x);
+	}
+	
+	public static function cos(x:Float) : Float {
+		return Math.cos(x);
+	}
+	
+	public static function tan(x:Float) : Float {
+		return Math.tan(x);
+	}
 }

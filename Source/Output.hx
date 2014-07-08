@@ -46,7 +46,7 @@ class Output extends Sprite
 		this.mouseChildren = false;
 		
 		var nameTxt : TextField = new TextField();
-		nameTxt.defaultTextFormat = new TextFormat("arial", 10, 0xffffff);
+		nameTxt.defaultTextFormat = new TextFormat("arial", 12, 0xffffff);
 		nameTxt.autoSize = TextFieldAutoSize.LEFT;
 		nameTxt.text = name;
 		nameTxt.selectable = false;
@@ -100,6 +100,13 @@ class Output extends Sprite
 	
 	public function set(value : Dynamic) {
 		this.value = value;
+	}
+	
+	public function disconect() : Void {
+		for (connection in _connections) {
+			var input : Input = cast connection.getInput();
+			input.disconect();
+		}
 	}
 	
 }

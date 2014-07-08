@@ -66,14 +66,21 @@ class Graph extends Sprite
 		_nodeList.addEventListener(UIEvent.CLICK, onListClicked);
 		
 		addEventListener(MouseEvent.RIGHT_CLICK, onRightClick);
-		addEventListener(MouseEvent.CLICK, onClick);
+		//addEventListener(MouseEvent.CLICK, onClick);
 		addEventListener(MouseEvent.MOUSE_DOWN, onMousePress);
 		addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 		
 		Lib.current.stage.addEventListener(Event.RESIZE, onStageResize);
+		Lib.current.stage.addEventListener(MouseEvent.CLICK, onClick);
+		
 		
 		initBg();
+	}
+	
+	private function onStageClick(e:Event):Void 
+	{
+		
 	}
 	
 	private function onMouseMove(e:MouseEvent):Void 
@@ -131,8 +138,8 @@ class Graph extends Sprite
 	
 	private function onListClicked(e:UIEvent):Void 
 	{
-		Main.uiRoot.removeChild(_nodeList, false);
-		_nodeListShown = false;
+		//Main.uiRoot.removeChild(_nodeList, false);
+		//_nodeListShown = false;
 		var nodeClass : Class<Node> = _nodeList.selectedItems[0].data.data;
 		var node : Node = Type.createInstance(nodeClass, []);
 		add(node);
@@ -142,10 +149,12 @@ class Graph extends Sprite
 	
 	private function onRightClick(e:MouseEvent):Void 
 	{
-		_nodeListShown = true;
-		Main.uiRoot.addChild(_nodeList);
-		_nodeList.x = e.stageX;
-		_nodeList.y = e.stageY;
+		if(e.target == this){
+			_nodeListShown = true;
+			Main.uiRoot.addChild(_nodeList);
+			_nodeList.x = e.stageX;
+			_nodeList.y = e.stageY;
+		}
 	}
 	
 	public function add(node : Node) {
@@ -165,6 +174,12 @@ class Graph extends Sprite
 	public function removeConnection(connection: Connection) {
 		_connectionContainer.removeChild(connection);
 		_connections.remove(connection);
+	}
+	
+	public function removeNode(node : Node) {
+		_nodes.remove(node);
+		if (_nodeContainer.contains(node))
+			_nodeContainer.removeChild(node);
 	}
 	
 }

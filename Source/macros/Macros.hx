@@ -1,7 +1,7 @@
 package macros;
 #if macro
 
-import api.API_Math;
+import api.*;
 import haxe.macro.Compiler;
 import haxe.macro.Context;
 import haxe.Template;
@@ -22,6 +22,7 @@ class Macros
 		var classesToParse : Array<Class<Dynamic>> = new Array<Class<Dynamic>>();
 		
 		classesToParse.push(API_Math);
+		classesToParse.push(API_Value);
 		
 		for (currentClass in classesToParse) {
 			
@@ -123,7 +124,6 @@ class Macros
 		for (param in _inputs) 
 			paramList += param.name +", ";
 		paramList = paramList.substr(0, paramList.length - 2);
-		trace(paramList);
 		
 		var file = File.getContent("Res/NodeTemplate.hx");
 		var t = new Template(file);
