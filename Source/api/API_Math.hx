@@ -1,0 +1,30 @@
+package api;
+
+/**
+ * ...
+ * @author TBaudon
+ */
+class API_Math
+{
+
+	public static function add(a : Float, b : Float) : Float {
+		return a + b;
+	}
+	
+	public static function sub(a : Float, b : Float) : Float {
+		return a - b;
+	}
+	
+	public static function mult(a : Float, b : Float) : Float {
+		return a * b;
+	}
+	
+	public static function div(a : Float, b : Float) : Float {
+		return a / b;
+	}
+	
+	public static function modulus(a : Int, b : Int) : { result : Int, rest:Int } {
+		return { result:Std.int(a / b), rest:a % b };
+	}
+	
+}
