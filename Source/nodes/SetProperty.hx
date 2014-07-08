@@ -31,8 +31,10 @@ class SetProperty extends Node
 		var valA : String = property.getValue();
 		var valB : Dynamic = value.getValue();
 		
-		if(valA != null && valB != null)
-		Reflect.setProperty(target, property.getValue(), value.getValue());
+		if (valA != null && valB != null) {
+			if(Reflect.hasField(target, property.getValue()))
+			Reflect.setProperty(target, property.getValue(), value.getValue());
+		}
 	}
 	
 }

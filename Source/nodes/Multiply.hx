@@ -23,10 +23,10 @@ class Multiply extends Node
 		
 		var result : Output = _outputs["result"];
 		
-		var aVal = a.getValue();
-		var bVal = b.getValue();
+		var aVal : Float = a.getValue();
+		var bVal : Float = b.getValue();
 		
-		var resultVal = aVal * bVal;
+		var resultVal : Float = aVal * bVal;
 		result.set(resultVal);
 	}
 	

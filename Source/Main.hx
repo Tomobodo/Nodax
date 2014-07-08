@@ -35,6 +35,13 @@ class Main extends Sprite {
 		
 		Toolkit.init();
 		Toolkit.openFullscreen(onToolkitInited);
+		
+		if (Reflect.isFunction(test)) {
+		}
+	}
+	
+	function test(a : Int, b : Int ) : Int {
+		return a + b;
 	}
 	
 	function onToolkitInited(root : Root) {
