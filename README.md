@@ -7,9 +7,10 @@ An experiment. How to make a graphical programming language such as the blueprin
 * Right click on object to delete them.
 
 ###Warnings :
-The messiest code I ever wrote.
-Very experimental and high chance of crash. 
-Doesn't compile for html5, ugly on windows target, works better on flash.
+* this is not a "haxification" of node.js or something like that.
+* The messiest code I ever wrote.
+* Very experimental and very likely to crash. 
+* ugly on html5 and windows works better on flash.
 
 I feel like the way I generate my node is overly complicated and that I could do
 a way better use of reflection. 
@@ -18,6 +19,7 @@ a way better use of reflection.
 Learning macros, templates, reflection.
 
 ###What's next ? :
+- node-webkit ui
 - react to event
 - add an object
 - add components to it
