@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<meta title="Engine" package="me.tbaubdon.engine" version="1.0.0" company="TBaudon" />
+	<app main="engine.Main" path="../bin/engine" file="Engine" />
+	
+	<source path="../src" />
+	<haxelib name="openfl" />
+	
+</project>

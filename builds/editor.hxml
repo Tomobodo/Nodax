@@ -1,0 +1,6 @@
+-cp src
+-main editor.Main
+-lib nodejs
+-D nodejs
+-dce full
+-js bin/js/editor.js

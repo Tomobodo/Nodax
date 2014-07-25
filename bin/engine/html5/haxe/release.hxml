@@ -1,0 +1,15 @@
+-main ApplicationMain 
+-cp E:\Outils\Dev\Haxe\haxe\lib/openfl/2,0,1/
+-D openfl=2.0.1
+-cp ../src
+-cp E:\Outils\Dev\Haxe\haxe\lib/openfl/2,0,1/backends/html5
+-cp E:\Outils\Dev\Haxe\haxe\lib/openfl/2,0,1/backends/html5
+-D tools=1.5.7
+-D openfl-html5
+-D html5
+-D web
+--remap flash:openfl
+-js ../bin/engine/html5/bin/Engine.js
+-cp ../bin/engine/html5/haxe
+-D html5
+--macro allowPackage("flash")
